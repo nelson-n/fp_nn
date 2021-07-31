@@ -97,19 +97,37 @@ def backprop(lr, batch_size, Y, W1, B1, W2, A1, A2, A3, Z1):
 
     return W1, B1, W2
 
-def run_epoch(X, Y, batch_size, lr, W1, B1, W2):
+#===============================================================================
+# Training Functions
+#===============================================================================
+
+def split_batches(X, Y, batch_size):
+
+    num_batches = int(len(X)/batch_size)
+    X_batches = np.array_split(X, num_batches)
+    Y_batches = np.array_split(Y, num_batches)
+
+    return X_batches, Y_batches
+
+def init_weights(X_neurons, W1_neurons, W2_neurons):
+
+    k = math.sqrt(1/X_neurons)
+
+    W1 = np.random.uniform(low = -k, high = k, size = (X_neurons, W1_neurons))
+    B1 = np.full(shape = (W1_neurons,), fill_value = 0.01)
+
+    W2 = np.random.uniform(low = -k, high = k, size = (W1_neurons, W2_neurons))
+
+    return W1, B1, W2
+
+def epoch(X_batches, Y_batches, lr, batch_size, W1, B1, W2):
 
     epoch_loss = 0.0
 
-    # Find number of batches in the epoch.
-    num_batches = int(len(X) / batch_size)
+    for batch_num in range(len(X_batches)):
 
-    for i in range(num_batches):
-
-        # Random sample batch_size observations without replacement.
-        obs = np.random.choice(len(X), batch_size, replace = False)
-        X = X[obs]
-        Y = Y[obs]
+        X = X_batches[batch_num]
+        Y = Y_batches[batch_num]
 
         # Forward propogation.
         A1, Z1, A2, Z2, A3 = feedforward(X, W1, B1, W2)
@@ -117,22 +135,80 @@ def run_epoch(X, Y, batch_size, lr, W1, B1, W2):
         # Backward propogation.
         W1, B1, W2 = backprop(lr, batch_size, Y, W1, B1, W2, A1, A2, A3, Z1)
 
-        # Calculate batch loss.
         batch_loss = sum(mseloss(A3, onehot(Y)))
         epoch_loss += batch_loss
 
-        if i % 10 == 0:
-            batch_acc = sum(np.argmax(A3, axis=1) == Y) / batch_size
-            print(batch_acc)
+    print('Epoch Loss =' + str(epoch_loss))
 
-    print(epoch_loss)
     return W1, B1, W2
 
-# Initialize layer weights. 
-k = math.sqrt(1/(28*28))
-W1 = np.random.uniform(low = -k, high = k, size = (28*28,128)) 
-B1 = np.full(shape = (128,), fill_value = 0.01)
-W2 = np.random.uniform(low = -k, high = k, size = (128,10)) 
+def epochs(X_train, Y_train, num_epochs, lr, batch_size, X_neurons, W1_neurons,
+           W2_neurons):
 
-W1, B1, W2 = run_epoch(train_imgs, train_lbls, 32, 0.01, W1, B1, W2)
+    X_batches, Y_batches = split_batches(X_train, Y_train, batch_size)
 
+    W1, B1, W2 = init_weights(X_neurons, W1_neurons, W2_neurons)
+
+    for epoch_num in range(num_epochs):
+
+        print('\nEpoch Number =' + str(epoch_num + 1)) 
+        W1, B1, W2 = epoch(X_batches, Y_batches, lr, batch_size, W1, B1, W2)
+        
+    return W1, B1, W2
+
+#===============================================================================
+# Train Neural Network
+#===============================================================================
+
+# Set parameters.
+X_train = train_imgs
+Y_train = train_lbls
+num_epochs = 5
+lr = 0.01
+batch_size = 10
+X_neurons = 784
+W1_neurons = 100
+W2_neurons = 10
+
+W1, B1, W2 = epochs(X_train, Y_train, num_epochs, lr, batch_size, X_neurons,
+                    W1_neurons, W2_neurons)
+
+#===============================================================================
+# Test Neural Network
+#===============================================================================
+
+X_test = test_imgs
+Y_test = test_lbls
+
+A1, Z1, A2, Z2, A3 = feedforward(X_test, W1, B1, W2)
+
+preds = np.argmax(A3, axis=1)
+
+accuracy = sum(preds == Y_test) / len(Y_test)
+print('Accuracy =', str(accuracy))
+
+#===============================================================================
+# Single Pass Through Network for Troubleshooting
+#===============================================================================
+
+X_batches, Y_batches = split_batches(X_train, Y_train, batch_size)
+
+W1, B1, W2 = init_weights(X_neurons, W1_neurons, W2_neurons)
+
+epoch_loss = 0.0
+
+for batch_num in range(len(X_batches)):
+
+    X = X_batches[batch_num]
+    Y = Y_batches[batch_num]
+
+    # Forward propogation.
+    A1, Z1, A2, Z2, A3 = feedforward(X, W1, B1, W2)
+
+    # Backward propogation.
+    W1, B1, W2 = backprop(lr, batch_size, Y, W1, B1, W2, A1, A2, A3, Z1)
+
+    batch_loss = sum(mseloss(A3, onehot(Y)))
+    epoch_loss += batch_loss
+
+print(epoch_loss)
