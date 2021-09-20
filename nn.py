@@ -212,3 +212,5 @@ for batch_num in range(len(X_batches)):
     epoch_loss += batch_loss
 
 print(epoch_loss)
+
+#gpg test
