@@ -213,4 +213,3 @@ for batch_num in range(len(X_batches)):
 
 print(epoch_loss)
 
-#test
