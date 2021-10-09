@@ -1,8 +1,8 @@
 
 #-------------------------------------------------------------------------------
-# nn.py written by Nelson Rayl 2021-06-26 
+# feedforward_nn.py written by lucius-verus-fan 2021-06-26 
 # 
-# Creates neural network from scratch in numpy.
+# Creates feedforward neural network from scratch in numpy.
 #-------------------------------------------------------------------------------
 
 import os
