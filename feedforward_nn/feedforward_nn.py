@@ -77,7 +77,6 @@ def feedforward(X, W1, B1, W2):
 
 def backprop(lr, batch_size, Y, W1, B1, W2, A1, A2, A3, Z1):
 
-
     # Find batch error.
     Y = onehot(Y)
     err_L2 = A3 - Y
