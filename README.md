@@ -17,5 +17,5 @@ sentence level numpy arrays for use in rnn.py.
 which tests min-char-rnn.py on the *War and Peace* data and adds more verbose 
 documentation for my own benefit.
 * My preferred RNN visualization is the following:
-![](./imgs/rnn_graph.png){width=90%}
+![](./imgs/rnn_graph.png){:width="50%"}
 
