@@ -27,5 +27,6 @@ and a naive optimization function for performing MLE.
 An implementation of Nelder-Mead optimization from scratch is available at:
 [nicolaivicol/nelder-mead-R](https://github.com/nicolaivicol/nelder-mead-R)
 * Likelihood calculated as:
+
 ![](./imgs/likelihood.png)
 
