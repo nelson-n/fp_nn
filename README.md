@@ -28,5 +28,5 @@ An implementation of Nelder-Mead optimization from scratch is available at:
 [nicolaivicol/nelder-mead-R](https://github.com/nicolaivicol/nelder-mead-R)
 * Likelihood calculated as:
 
-![](./imgs/likelihood.png){:height="80%" width="80%"}
+![](./imgs/likelihood.png)
 
