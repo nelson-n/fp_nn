@@ -19,3 +19,13 @@ documentation for my own benefit.
 * My preferred RNN visualization is the following:
 ![](./imgs/rnn_graph.png)
 
+### mle
+* Maximum likelihood estimation of a normal distribution from scratch.
+* **mle.R** includes a density function, negative log likelihood function,
+and a naive optimization function for performing MLE.
+* This is benchmarked against MLE performed with Nelder-Mead simplex optimization.
+An implementation of Nelder-Mead optimization from scratch is available at:
+[nicolaivicol/nelder-mead-R](https://github.com/nicolaivicol/nelder-mead-R)
+* Likelihood calculated as:
+![](.imgs/likelihood.png)
+
