@@ -1,7 +1,5 @@
 ## fp_nn: Neural Networks built from first principles in NumPy.
 
-# Test
-
 ### feedforward_nn
 * **feedforward_nn.py** train a feedforward neural network for classifying MNIST
 handwritten digits.
