@@ -10,9 +10,9 @@ import gzip
 import math
 import numpy as np
 
-os.chdir('/Users/nelsonrayl/Desktop/init/fp_NN')
+os.chdir()
 
-data_dir = '/Users/nelsonrayl/Desktop/init/fp_NN/data/'
+data_dir = ''
 
 #===============================================================================
 # Unzip Data and Convert to .np

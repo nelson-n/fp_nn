@@ -30,3 +30,7 @@ An implementation of Nelder-Mead optimization from scratch is available at:
 
 ![](./imgs/likelihood.png)
 
+### random
+* Contains scripts with random experiments, tests, and exploratory exercises.
+* **ml_nn_problems.py** solves simple problems related to machine learnings and neural networks.
+
