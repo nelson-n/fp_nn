@@ -1,3 +1,4 @@
+.gitignore
 micro_nn.py
 feedforward_nn/data
 **/.DS_Store

@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------------------
 # ml_nn_problems.py written by nelson-n 2022-01-09 
 # 
-# Solves simple problems related to machine learnings and neural networks.
+# Solves simple problems related to machine learning and neural networks.
 #-------------------------------------------------------------------------------
 
 import math
