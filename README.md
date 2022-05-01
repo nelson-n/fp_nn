@@ -35,4 +35,5 @@ An implementation of Nelder-Mead optimization from scratch is available at:
 * Contains scripts with random experiments, tests, and exploratory exercises.
 * **ml_nn_problems.py** solves simple problems related to machine learning and neural networks.
 * **ols_logit_sgd.py** estimates OLS and logit coefficients using stochastic gradient descent. Coefficient accuracy is tested out-of-sample.
+* **metropolis_hastings.py** implements Metropolis-Hastings algorithm both in PyMC3 and from scratch.
 
